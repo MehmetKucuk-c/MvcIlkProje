@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICategoryService.cs" />
+    <Compile Include="Abstract\IWriterService.cs" />
+    <Compile Include="Concrete\WriterManager.cs" />
     <Compile Include="ValidationsRules\CategoryValidator.cs" />
     <Compile Include="Concrete\CategoryManager.cs" />
     <Compile Include="EntityFramework\EfAboutDal.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="EntityFramework\EfHeadingDal.cs" />
     <Compile Include="EntityFramework\EfWriterDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationsRules\WriterValidator.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

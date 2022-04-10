@@ -9,12 +9,12 @@ namespace DataAccessLayer.Concrete.Repositories
 {
     public class GeneticRepository<T> : IRepository<T> where T : class
     {
-        private Context c = new Context();
-        private DbSet<T> _object;
+        private readonly Context _c = new Context();
+        private readonly DbSet<T> _object;
 
         public GeneticRepository()
         {
-            _object = c.Set<T>();
+            _object = _c.Set<T>();
         }
 
         public List<T> List()
@@ -24,24 +24,36 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public void Insert(T p)
         {
-            _object.Add(p);
-            c.SaveChanges();
+            var addedEntity = _c.Entry(p);
+            addedEntity.State = EntityState.Added;
+            //_object.Add(p);
+            _c.SaveChanges();
         }
 
         public void Delete(T p)
         {
-            _object.Remove(p);
-            c.SaveChanges();
+            var deletedEntity = _c.Entry(p);
+            deletedEntity.State = EntityState.Deleted;
+            //_object.Remove(p);
+            _c.SaveChanges();
         }
 
         public void Update(T p)
         {
-            c.SaveChanges();
+            var updatedEntity = _c.Entry(p);
+            updatedEntity.State = EntityState.Modified;
+            _c.SaveChanges();
         }
 
         public List<T> List(Expression<Func<T, bool>> filter)
         {
             return _object.Where(filter).ToList();
+        }
+
+        public T Get(Expression<Func<T, bool>> filter)
+        {
+            return _object.SingleOrDefault(filter);
+            //Tek DEger Döndürüsü Id Göre Arama yaparken kullanmak mantıklı linq sorgusu 
         }
     }
 }
