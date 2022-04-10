@@ -70,6 +70,10 @@
     <Compile Include="Migrations\202204101025113_mig_WriterTable_edit.designer.cs">
       <DependentUpon>202204101025113_mig_WriterTable_edit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204101228051_mig_wrterTitleAdd.cs" />
+    <Compile Include="Migrations\202204101228051_mig_wrterTitleAdd.designer.cs">
+      <DependentUpon>202204101228051_mig_wrterTitleAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202204101025113_mig_WriterTable_edit.resx">
       <DependentUpon>202204101025113_mig_WriterTable_edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204101228051_mig_wrterTitleAdd.resx">
+      <DependentUpon>202204101228051_mig_wrterTitleAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -15,6 +15,7 @@ namespace MvcIlkProje.Controllers
     public class WriterController : Controller
     {
         private readonly WriterManager _wm = new WriterManager(new EfWriterDal());
+        private readonly WriterValidator _validatorRules = new WriterValidator();
         public ActionResult Index()
         {
             var writerValues = _wm.GetList();
@@ -30,8 +31,8 @@ namespace MvcIlkProje.Controllers
         [HttpPost]
         public ActionResult AddWriter(Writer p)
         {
-            WriterValidator validatorRules = new WriterValidator();
-            ValidationResult result = validatorRules.Validate(p);
+            
+            var result = _validatorRules.Validate(p);
             if (result.IsValid)
             {
                 _wm.WriterAdd(p);
@@ -42,6 +43,32 @@ namespace MvcIlkProje.Controllers
             {
                 ModelState.AddModelError(variable.PropertyName,variable.ErrorMessage);
             }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult EditWriter(int id)
+        {
+            var writerValue = _wm.GetById(id);
+            return View(writerValue);
+        }
+
+        [HttpPost]
+        public ActionResult EditWriter(Writer p)
+        {
+
+            var result = _validatorRules.Validate(p);
+            if (result.IsValid)
+            {
+                _wm.WriterUpdate(p);
+                return RedirectToAction("Index");
+            }
+
+            foreach (var variable in result.Errors)
+            {
+                ModelState.AddModelError(variable.PropertyName, variable.ErrorMessage);
+            }
+
             return View();
         }
     }
